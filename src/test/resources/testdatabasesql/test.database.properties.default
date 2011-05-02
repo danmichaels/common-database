@@ -1,0 +1,4 @@
+database.host=localhost
+database.file=common-database-test
+database.user=SYSDBA
+database.password=masterkey
