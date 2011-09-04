@@ -2,8 +2,11 @@ package me.vgv.common.database.hibernate;
 
 import org.hibernate.classic.Session;
 import org.mockito.Mockito;
+import org.mockito.internal.verification.VerificationModeFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.io.Serializable;
 
 /**
  * @author Vasily Vasilkov (vgv@vgv.me)
@@ -17,23 +20,84 @@ public class SessionWrapperTest {
 		Assert.assertSame(session, sessionWrapper.getUnderlyingSession());
 	}
 
+	@Test
+	public void testFlush() throws Exception {
+		Session session = Mockito.mock(Session.class);
+
+		SessionWrapper sessionWrapper = new SessionWrapper(session);
+		sessionWrapper.flush();
+
+		Mockito.verify(session, VerificationModeFactory.times(1)).flush();
+		Mockito.verifyNoMoreInteractions(session);
+	}
+
+
+	@Test(groups = "unit")
+	public void testSaveOrUpdateCopy_1() throws Exception {
+		Session session = Mockito.mock(Session.class);
+		Object returnObject = new Object();
+		Mockito.when(session.saveOrUpdateCopy(Mockito.<Object>anyObject())).thenReturn(returnObject);
+
+		Object object = new Object();
+		SessionWrapper sessionWrapper = new SessionWrapper(session);
+		Object returnedObject = sessionWrapper.saveOrUpdateCopy(object);
+
+		Assert.assertSame(returnObject, returnedObject);
+		Mockito.verify(session, VerificationModeFactory.times(1)).saveOrUpdateCopy(object);
+		Mockito.verifyNoMoreInteractions(session);
+	}
+
+	@Test(groups = "unit")
+	public void testSaveOrUpdateCopy_2() throws Exception {
+		Session session = Mockito.mock(Session.class);
+		Object returnObject = new Object();
+		Mockito.when(session.saveOrUpdateCopy(Mockito.<Object>anyObject(), Mockito.<Serializable>any())).thenReturn(returnObject);
+
+		Object object = new Object();
+		Integer id = 870;
+		SessionWrapper sessionWrapper = new SessionWrapper(session);
+		Object returnedObject = sessionWrapper.saveOrUpdateCopy(object, id);
+
+		Assert.assertSame(returnObject, returnedObject);
+		Mockito.verify(session, VerificationModeFactory.times(1)).saveOrUpdateCopy(object, id);
+		Mockito.verifyNoMoreInteractions(session);
+	}
+
+	@Test(groups = "unit")
+	public void testSaveOrUpdateCopy_3() throws Exception {
+		Session session = Mockito.mock(Session.class);
+		Object returnObject = new Object();
+		Mockito.when(session.saveOrUpdateCopy(Mockito.anyString(), Mockito.<Object>anyObject())).thenReturn(returnObject);
+
+		String entityName = "entity";
+		Object object = new Object();
+		SessionWrapper sessionWrapper = new SessionWrapper(session);
+		Object returnedObject = sessionWrapper.saveOrUpdateCopy(entityName, object);
+
+		Assert.assertSame(returnObject, returnedObject);
+		Mockito.verify(session, VerificationModeFactory.times(1)).saveOrUpdateCopy(entityName, object);
+		Mockito.verifyNoMoreInteractions(session);
+	}
+
+	@Test(groups = "unit")
+	public void testSaveOrUpdateCopy_4() throws Exception {
+		Session session = Mockito.mock(Session.class);
+		Object returnObject = new Object();
+		Mockito.when(session.saveOrUpdateCopy(Mockito.anyString(), Mockito.<Object>anyObject(), Mockito.<Serializable>any())).thenReturn(returnObject);
+
+		String entityName = "entity";
+		Object object = new Object();
+		Integer id = 78956;
+
+		SessionWrapper sessionWrapper = new SessionWrapper(session);
+		Object returnedObject = sessionWrapper.saveOrUpdateCopy(entityName, object, id);
+
+		Assert.assertSame(returnObject, returnedObject);
+		Mockito.verify(session, VerificationModeFactory.times(1)).saveOrUpdateCopy(entityName, object, id);
+		Mockito.verifyNoMoreInteractions(session);
+	}
+
 	/*
-	@Test(groups = "unit")
-	public void testSaveOrUpdateCopy() throws Exception {
-	}
-
-	@Test(groups = "unit")
-	public void testSaveOrUpdateCopy() throws Exception {
-	}
-
-	@Test(groups = "unit")
-	public void testSaveOrUpdateCopy() throws Exception {
-	}
-
-	@Test(groups = "unit")
-	public void testSaveOrUpdateCopy() throws Exception {
-	}
-
 	@Test(groups = "unit")
 	public void testFind() throws Exception {
 	}
@@ -114,9 +178,7 @@ public class SessionWrapperTest {
 	public void testGetSession() throws Exception {
 	}
 
-	@Test
-	public void testFlush() throws Exception {
-	}
+
 
 	@Test
 	public void testSetFlushMode() throws Exception {
