@@ -48,21 +48,6 @@
 		</sequential>
 	</macrodef>
 
-	<macrodef name="gwt-compile" description="Компилирует клиентские классы (GWT) в JavaScript">
-		<attribute name="module"/>
-		<attribute name="classpathref"/>
-		<sequential>
-			<mkdir dir="output/www"/>
-			<java fork="yes" classname="com.google.gwt.dev.Compiler" maxmemory="512m" classpathref="@{classpathref}">
-				<arg value="-war"/>
-				<arg value="output/www"/>
-				<arg value="-style"/>
-				<arg value="OBF"/>
-				<arg value="@{module}"/>
-			</java>
-		</sequential>
-	</macrodef>
-
 	<macrodef name="test-run" description="Выполняет тесты">
 		<sequential>
 			<!-- Подключим testng -->
