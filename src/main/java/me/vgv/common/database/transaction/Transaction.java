@@ -2,7 +2,7 @@ package me.vgv.common.database.transaction;
 
 import com.google.common.base.Preconditions;
 
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Транзакция в системе.
@@ -21,9 +21,9 @@ public final class Transaction {
 	/**
 	 * Генератор последовательных идентификаторов для всех транзакций.
 	 */
-	private static final AtomicInteger TRANSACTIONAL_ID_GENERATOR = new AtomicInteger(0);
+	private static final AtomicLong TRANSACTIONAL_ID_GENERATOR = new AtomicLong(0);
 
-	private final int uniqueTransactionId = TRANSACTIONAL_ID_GENERATOR.incrementAndGet();
+	private final long uniqueTransactionId = TRANSACTIONAL_ID_GENERATOR.incrementAndGet();
 	private final long startTime = System.currentTimeMillis();
 	private final TransactionDefinition transactionDefinition;
 
@@ -35,7 +35,7 @@ public final class Transaction {
 	/**
 	 * @return уникальный идентификатор транзакции
 	 */
-	public int getUniqueTransactionId() {
+	public long getUniqueTransactionId() {
 		return uniqueTransactionId;
 	}
 

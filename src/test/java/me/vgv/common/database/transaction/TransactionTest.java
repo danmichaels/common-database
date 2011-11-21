@@ -13,7 +13,7 @@ public class TransactionTest {
 
 	@Test(groups = "unit")
 	public void testUniqueIdentifiers() throws Exception {
-		Set<Integer> set = new HashSet<Integer>();
+		Set<Long> set = new HashSet<Long>();
 
 		for (int i = 0; i < 100000; i++) {
 			Transaction transaction = new Transaction(TransactionDefinition.DEFAULT_TRANSACTION_DEFINITION);
