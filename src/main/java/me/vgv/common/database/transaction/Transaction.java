@@ -21,9 +21,9 @@ public final class Transaction {
 	/**
 	 * Генератор последовательных идентификаторов для всех транзакций.
 	 */
-	private static final AtomicLong TRANSACTIONAL_ID_GENERATOR = new AtomicLong(0);
+	private static final AtomicLong TRANSACTION_ID_GENERATOR = new AtomicLong(0);
 
-	private final long uniqueTransactionId = TRANSACTIONAL_ID_GENERATOR.incrementAndGet();
+	private final long uniqueTransactionId = TRANSACTION_ID_GENERATOR.incrementAndGet();
 	private final long startTime = System.currentTimeMillis();
 	private final TransactionDefinition transactionDefinition;
 
