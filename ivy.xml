@@ -2,15 +2,15 @@
 	<info organisation="me.vgv.common" module="common-database"/>
 	<dependencies>
 
-		<dependency org="me.vgv.common" name="common-utils" rev="0.1.0" transitive="false"/>
+		<dependency org="me.vgv.common" name="common-utils" rev="0.1.1" transitive="false"/>
 		<dependency org="org.slf4j" name="slf4j-api" rev="1.6.1" transitive="false"/>
 		<dependency org="aopalliance" name="aopalliance" rev="1.0" transitive="false"/>
 		<dependency org="org.firebirdsql.jdbc" name="jaybird" rev="2.1.6" transitive="false"/>
 		<dependency org="com.google.guava" name="guava" rev="r09" transitive="false"/>
 		<dependency org="com.google.inject" name="guice" rev="3.0" transitive="false"/>
 
-		<dependency org="org.hibernate" name="hibernate-core" rev="3.6.4.Final" transitive="false"/>
-		<dependency org="org.hibernate" name="hibernate-commons-annotations" rev="3.2.0.Final" transitive="false"/>
+		<dependency org="org.hibernate" name="hibernate-core" rev="4.0.0.Final" transitive="false"/>
+		<dependency org="org.hibernate" name="hibernate-commons-annotations" rev="4.0.0.Final" transitive="false"/>
 		<dependency org="org.hibernate.javax.persistence" name="hibernate-jpa-2.0-api" rev="1.0.0.Final"
 					transitive="false"/>
 

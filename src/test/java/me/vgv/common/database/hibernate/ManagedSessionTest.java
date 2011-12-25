@@ -1,7 +1,7 @@
 package me.vgv.common.database.hibernate;
 
 import me.vgv.common.database.CommonDatabaseException;
-import org.hibernate.classic.Session;
+import org.hibernate.Session;
 import org.mockito.Mockito;
 import org.testng.annotations.Test;
 
