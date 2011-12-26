@@ -52,4 +52,8 @@ public final class Transaction {
 	public TransactionDefinition getTransactionDefinition() {
 		return transactionDefinition;
 	}
+
+	public static long getCurrentTransactionIDGeneratorValue() {
+		return TRANSACTION_ID_GENERATOR.get();
+	}
 }
