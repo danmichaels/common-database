@@ -6,8 +6,7 @@ import me.vgv.common.database.config.HibernateConfiguration;
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
-import org.hibernate.classic.Session;
-import org.hibernate.engine.FilterDefinition;
+import org.hibernate.engine.spi.FilterDefinition;
 import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.metadata.CollectionMetadata;
 import org.hibernate.stat.Statistics;
@@ -32,7 +31,6 @@ public final class BaseSessionFactory implements SessionFactory {
 
 		// Настройки Hibernate
 		configuration.setProperty(Environment.DIALECT, hibernateConfiguration.getDialect());
-		configuration.setProperty(Environment.CACHE_PROVIDER, hibernateConfiguration.getCacheProviderClass());
 		configuration.setProperty(Environment.USE_QUERY_CACHE, String.valueOf(hibernateConfiguration.getUseQueryCache()));
 		configuration.setProperty(Environment.USE_SECOND_LEVEL_CACHE, String.valueOf(hibernateConfiguration.getUseSecondLevelCache()));
 		configuration.setProperty(Environment.FORMAT_SQL, String.valueOf(hibernateConfiguration.isFormatSql()));
@@ -63,21 +61,6 @@ public final class BaseSessionFactory implements SessionFactory {
 	@Override
 	public Session openSession() throws HibernateException {
 		return sessionFactory.openSession();
-	}
-
-	@Override
-	public Session openSession(Interceptor interceptor) throws HibernateException {
-		return sessionFactory.openSession(interceptor);
-	}
-
-	@Override
-	public Session openSession(Connection connection) {
-		return sessionFactory.openSession(connection);
-	}
-
-	@Override
-	public Session openSession(Connection connection, Interceptor interceptor) {
-		return sessionFactory.openSession(connection, interceptor);
 	}
 
 	@Override
@@ -186,11 +169,6 @@ public final class BaseSessionFactory implements SessionFactory {
 	}
 
 	@Override
-	public FilterDefinition getFilterDefinition(String filterName) throws HibernateException {
-		return sessionFactory.getFilterDefinition(filterName);
-	}
-
-	@Override
 	public boolean containsFetchProfileDefinition(String name) {
 		return sessionFactory.containsFetchProfileDefinition(name);
 	}
@@ -204,4 +182,24 @@ public final class BaseSessionFactory implements SessionFactory {
 	public Reference getReference() throws NamingException {
 		return sessionFactory.getReference();
 	}
+
+    @Override
+    public SessionFactoryOptions getSessionFactoryOptions() {
+        return sessionFactory.getSessionFactoryOptions();
+    }
+
+    @Override
+    public SessionBuilder withOptions() {
+        return sessionFactory.withOptions();
+    }
+
+    @Override
+    public StatelessSessionBuilder withStatelessOptions() {
+        return sessionFactory.withStatelessOptions();
+    }
+
+    @Override
+    public FilterDefinition getFilterDefinition(String filterName) throws HibernateException {
+        return sessionFactory.getFilterDefinition(filterName);
+    }
 }

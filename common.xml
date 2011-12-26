@@ -7,12 +7,10 @@
 			<ivy:retrieve
 					pattern="lib/jar/[artifact].[ext]"
 					overwriteMode="newer"
-					log="quiet"
 					type="jar,bundle"/>
 			<ivy:retrieve
 					pattern="lib/source/[artifact].[ext]"
 					overwriteMode="newer"
-					log="quiet"
 					type="source"/>
 		</sequential>
 	</macrodef>

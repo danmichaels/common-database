@@ -5,7 +5,7 @@ import me.vgv.common.database.ConnectionFactory;
 import me.vgv.common.database.connection.ManagedConnection;
 import me.vgv.common.database.transaction.NoCurrentTransactionException;
 import org.hibernate.HibernateException;
-import org.hibernate.connection.ConnectionProvider;
+import org.hibernate.service.jdbc.connections.spi.ConnectionProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,10 +32,6 @@ public final class HibernateConnectionProvider implements ConnectionProvider {
 
 	public HibernateConnectionProvider() {
 		connectionFactory = injector.getInstance(ConnectionFactory.class);
-	}
-
-	@Override
-	public void configure(Properties properties) throws HibernateException {
 	}
 
 	@Override
@@ -66,12 +62,17 @@ public final class HibernateConnectionProvider implements ConnectionProvider {
 		connection.close();
 	}
 
-	@Override
-	public void close() throws HibernateException {
+    @Override
+    public boolean isUnwrappableAs(Class unwrapType) {
+       throw new UnsupportedOperationException("not implemented yet");
+    }
 
-	}
+    @Override
+    public <T> T unwrap(Class<T> unwrapType) {
+        throw new UnsupportedOperationException("not implemented yet");
+    }
 
-	@Override
+    @Override
 	public boolean supportsAggressiveRelease() {
 		return true;
 	}

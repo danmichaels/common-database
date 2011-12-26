@@ -2,6 +2,7 @@ package me.vgv.common.database.hibernate;
 
 import com.google.common.base.Preconditions;
 import org.hibernate.*;
+import org.hibernate.jdbc.ReturningWork;
 import org.hibernate.jdbc.Work;
 import org.hibernate.stat.SessionStatistics;
 import org.hibernate.type.Type;
@@ -17,141 +18,18 @@ import java.util.List;
  *
  * @author Vasily Vasilkov (vgv@vgv.me)
  */
-@SuppressWarnings({"deprecation"})
-public class SessionWrapper implements org.hibernate.classic.Session {
+public class SessionWrapper implements Session {
 
-	private final org.hibernate.classic.Session peer;
+	private final Session peer;
 
-	public SessionWrapper(org.hibernate.classic.Session peer) {
+	public SessionWrapper(Session peer) {
 		Preconditions.checkNotNull(peer, "peer is null - error");
 
 		this.peer = peer;
 	}
 
-	public org.hibernate.classic.Session getUnderlyingSession() {
+	public Session getUnderlyingSession() {
 		return peer;
-	}
-
-	@Override
-	public Object saveOrUpdateCopy(Object object) throws HibernateException {
-		return peer.saveOrUpdateCopy(object);
-	}
-
-	@Override
-	public Object saveOrUpdateCopy(Object object, Serializable id) throws HibernateException {
-		return peer.saveOrUpdateCopy(object, id);
-	}
-
-	@Override
-	public Object saveOrUpdateCopy(String entityName, Object object) throws HibernateException {
-		return peer.saveOrUpdateCopy(entityName, object);
-	}
-
-	@Override
-	public Object saveOrUpdateCopy(String entityName, Object object, Serializable id) throws HibernateException {
-		return peer.saveOrUpdateCopy(entityName, object, id);
-	}
-
-	@Override
-	public List find(String query) throws HibernateException {
-		return peer.find(query);
-	}
-
-	@Override
-	public List find(String query, Object value, Type type) throws HibernateException {
-		return peer.find(query, value, type);
-	}
-
-	@Override
-	public List find(String query, Object[] values, Type[] types) throws HibernateException {
-		return peer.find(query, values, types);
-	}
-
-	@Override
-	public Iterator iterate(String query) throws HibernateException {
-		return peer.iterate(query);
-	}
-
-	@Override
-	public Iterator iterate(String query, Object value, Type type) throws HibernateException {
-		return peer.iterate(query, value, type);
-	}
-
-	@Override
-	public Iterator iterate(String query, Object[] values, Type[] types) throws HibernateException {
-		return peer.iterate(query, values, types);
-	}
-
-	@Override
-	public Collection filter(Object collection, String filter) throws HibernateException {
-		return peer.filter(collection, filter);
-	}
-
-	@Override
-	public Collection filter(Object collection, String filter, Object value, Type type) throws HibernateException {
-		return peer.filter(collection, filter, value, type);
-	}
-
-	@Override
-	public Collection filter(Object collection, String filter, Object[] values, Type[] types) throws HibernateException {
-		return peer.filter(collection, filter, values, types);
-	}
-
-	@Override
-	public int delete(String query) throws HibernateException {
-		return peer.delete(query);
-	}
-
-	@Override
-	public int delete(String query, Object value, Type type) throws HibernateException {
-		return peer.delete(query, value, type);
-	}
-
-	@Override
-	public int delete(String query, Object[] values, Type[] types) throws HibernateException {
-		return peer.delete(query, values, types);
-	}
-
-	@Override
-	@Deprecated
-	public Query createSQLQuery(String sql, String returnAlias, Class returnClass) {
-		return peer.createSQLQuery(sql, returnAlias, returnClass);
-	}
-
-	@Override
-	@Deprecated
-	public Query createSQLQuery(String sql, String[] returnAliases, Class[] returnClasses) {
-		return peer.createSQLQuery(sql, returnAliases, returnClasses);
-	}
-
-	@Override
-	public void save(Object object, Serializable id) throws HibernateException {
-		peer.save(object, id);
-	}
-
-	@Override
-	public void save(String entityName, Object object, Serializable id) throws HibernateException {
-		peer.save(entityName, object, id);
-	}
-
-	@Override
-	public void update(Object object, Serializable id) throws HibernateException {
-		peer.update(object, id);
-	}
-
-	@Override
-	public void update(String entityName, Object object, Serializable id) throws HibernateException {
-		peer.update(entityName, object, id);
-	}
-
-	@Override
-	public EntityMode getEntityMode() {
-		return peer.getEntityMode();
-	}
-
-	@Override
-	public Session getSession(EntityMode entityMode) {
-		return peer.getSession(entityMode);
 	}
 
 	@Override
@@ -182,11 +60,6 @@ public class SessionWrapper implements org.hibernate.classic.Session {
 	@Override
 	public SessionFactory getSessionFactory() {
 		return peer.getSessionFactory();
-	}
-
-	@Override
-	public Connection connection() throws HibernateException {
-		return peer.connection();
 	}
 
 	@Override
@@ -509,10 +382,6 @@ public class SessionWrapper implements org.hibernate.classic.Session {
 		return peer.disconnect();
 	}
 
-	@Override
-	public void reconnect() throws HibernateException {
-		peer.reconnect();
-	}
 
 	@Override
 	public void reconnect(Connection connection) throws HibernateException {
@@ -543,4 +412,29 @@ public class SessionWrapper implements org.hibernate.classic.Session {
 	public LobHelper getLobHelper() {
 		return peer.getLobHelper();
 	}
+
+    @Override
+    public SharedSessionBuilder sessionWithOptions() {
+        return peer.sessionWithOptions();
+    }
+
+    @Override
+    public void refresh(String entityName, Object object) throws HibernateException {
+        peer.refresh(entityName, object);
+    }
+
+    @Override
+    public void refresh(String entityName, Object object, LockOptions lockOptions) throws HibernateException {
+        peer.refresh(entityName, object, lockOptions);
+    }
+
+    @Override
+    public <T> T doReturningWork(ReturningWork<T> work) throws HibernateException {
+        return peer.doReturningWork(work);
+    }
+
+    @Override
+    public String getTenantIdentifier() {
+        return peer.getTenantIdentifier();
+    }
 }
