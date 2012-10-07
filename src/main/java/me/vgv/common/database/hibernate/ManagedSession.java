@@ -2,8 +2,8 @@ package me.vgv.common.database.hibernate;
 
 import me.vgv.common.database.CommonDatabaseException;
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.classic.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

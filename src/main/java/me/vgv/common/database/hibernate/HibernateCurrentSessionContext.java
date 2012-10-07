@@ -4,9 +4,9 @@ import com.google.inject.Injector;
 import me.vgv.common.database.TransactionManager;
 import me.vgv.common.database.transaction.Transaction;
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.context.spi.CurrentSessionContext;
-import org.hibernate.engine.spi.SessionFactoryImplementor;
+import org.hibernate.classic.Session;
+import org.hibernate.context.CurrentSessionContext;
+import org.hibernate.engine.SessionFactoryImplementor;
 
 /**
  * @author Vasily Vasilkov (vgv@vgv.me)
@@ -24,7 +24,7 @@ public final class HibernateCurrentSessionContext implements CurrentSessionConte
 	private final SessionFactoryImplementor sessionFactory;
 	private final TransactionManager transactionManager;
 
-	public HibernateCurrentSessionContext(SessionFactoryImplementor sessionFactory) {
+	public HibernateCurrentSessionContext(org.hibernate.engine.SessionFactoryImplementor sessionFactory) {
 		this.sessionFactory = sessionFactory;
 		this.transactionManager = injector.getInstance(TransactionManager.class);
 	}
