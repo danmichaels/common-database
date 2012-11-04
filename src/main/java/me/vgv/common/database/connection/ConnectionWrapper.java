@@ -5,6 +5,7 @@ import com.google.common.base.Preconditions;
 import java.sql.*;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.Executor;
 
 /**
  * Простой wrapper, который транслирует абсолютно все вызовы
@@ -269,5 +270,30 @@ public class ConnectionWrapper implements Connection {
 	@Override
 	public boolean isWrapperFor(Class<?> iface) throws SQLException {
 		return peer.isWrapperFor(iface);
+	}
+
+	@Override
+	public void setSchema(String schema) throws SQLException {
+		peer.setSchema(schema);
+	}
+
+	@Override
+	public String getSchema() throws SQLException {
+		return peer.getSchema();
+	}
+
+	@Override
+	public void abort(Executor executor) throws SQLException {
+		peer.abort(executor);
+	}
+
+	@Override
+	public void setNetworkTimeout(Executor executor, int milliseconds) throws SQLException {
+		peer.setNetworkTimeout(executor, milliseconds);
+	}
+
+	@Override
+	public int getNetworkTimeout() throws SQLException {
+		return peer.getNetworkTimeout();
 	}
 }

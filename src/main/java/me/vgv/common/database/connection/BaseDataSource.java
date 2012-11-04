@@ -12,6 +12,8 @@ import javax.sql.DataSource;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.SQLFeatureNotSupportedException;
+import java.util.logging.Logger;
 
 /**
  * Реализация DataSource который основан на DBCP BasicDataSource и все вызовы транслирует ему.
@@ -96,5 +98,10 @@ public final class BaseDataSource implements DataSource {
 
 	public boolean isClosed() {
 		return dataSource.isClosed();
+	}
+
+	@Override
+	public Logger getParentLogger() throws SQLFeatureNotSupportedException {
+		return ((DataSource) dataSource).getParentLogger();
 	}
 }
