@@ -1,4 +1,4 @@
-<project xmlns:ivy="antlib:org.apache.ivy.ant" name="common-database" default="dist">
+<project name="common-database" default="dist">
 
 	<import file="common.xml"/>
 
@@ -40,15 +40,15 @@
 				classpathref="test-compile-classpath"/>
 	</target>
 
-	<target name="jar" depends="compile">
-		<jar basedir="output/classes" jarfile="dist/common-database.jar"/>
+	<target name="package" depends="compile">
+		<jar jarfile="dist/common-database.jar" basedir="output/classes"/>
+		<jar jarfile="dist/common-database-sources.jar" basedir="src/main/java"/>
 	</target>
 
-	<target name="test" depends="compile-test">
+	<target name="test" depends="clean, compile, compile-test, package">
 		<test-run/>
 	</target>
 
-	<target name="dist" depends="clean, jar">
-	</target>
+	<target name="dist" depends="clean, test, package"/>
 
 </project>
