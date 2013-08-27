@@ -11,7 +11,26 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" exported="" name="guice-3.0" level="project" />
+    <orderEntry type="library" exported="" name="javassist-3.12.0.GA" level="project" />
+    <orderEntry type="library" exported="" name="hibernate-commons-annotations-3.2.0.Final" level="project" />
+    <orderEntry type="library" exported="" name="hibernate-core-3.6.10.Final" level="project" />
+    <orderEntry type="library" exported="" name="jta-1.1" level="project" />
+    <orderEntry type="library" exported="" name="hibernate-jpa-2.0-api-1.0.0.Final" level="project" />
+    <orderEntry type="library" scope="TEST" name="testng-6.8" level="project" />
+    <orderEntry type="library" exported="" name="commons-lang-2.6" level="project" />
+    <orderEntry type="library" exported="" name="connector-1.0" level="project" />
+    <orderEntry type="library" exported="" name="commons-dbcp-1.4" level="project" />
+    <orderEntry type="library" scope="TEST" name="mockito-all-1.9.0" level="project" />
+    <orderEntry type="library" exported="" name="guava-13.0.1" level="project" />
+    <orderEntry type="library" exported="" name="jaybird-jdk17-2.2.2" level="project" />
+    <orderEntry type="library" exported="" name="dom4j-1.6.1" level="project" />
+    <orderEntry type="library" exported="" name="commons-pool-1.6" level="project" />
+    <orderEntry type="library" exported="" name="commons-collections-3.2.1" level="project" />
+    <orderEntry type="library" exported="" name="slf4j-api-1.6.6" level="project" />
+    <orderEntry type="library" exported="" name="common-utils-0.1.2" level="project" />
+    <orderEntry type="library" exported="" name="aopalliance-1.0" level="project" />
+    <orderEntry type="library" exported="" name="javax.inject-1" level="project" />
   </component>
 </module>
 

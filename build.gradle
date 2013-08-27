@@ -1,0 +1,39 @@
+apply plugin: "java"
+
+// transitive dependency management is ugly, turn it off
+configurations.all {
+	transitive = false
+}
+
+repositories {
+	maven {
+		url "http://nexus.vgv.me/content/groups/public"
+	}
+}
+
+dependencies {
+	compile group: "me.vgv.common", name: "common-utils", version: "0.1.2"
+	compile group: "org.slf4j", name: "slf4j-api", version: "1.6.6"
+	compile group: "aopalliance", name: "aopalliance", version: "1.0"
+	compile group: "org.firebirdsql.jdbc", name: "jaybird-jdk17", version: "2.2.2"
+	compile group: "com.google.guava", name: "guava", version: "13.0.1"
+	compile group: "com.google.inject", name: "guice", version: "3.0"
+	compile group: "org.hibernate", name: "hibernate-core", version: "3.6.10.Final"
+	compile group: "org.hibernate", name: "hibernate-commons-annotations", version: "3.2.0.Final"
+	compile group: "org.hibernate.javax.persistence", name: "hibernate-jpa-2.0-api", version: "1.0.0.Final"
+	compile group: "commons-lang", name: "commons-lang", version: "2.6"
+	compile group: "commons-dbcp", name: "commons-dbcp", version: "1.4"
+	compile group: "commons-pool", name: "commons-pool", version: "1.6"
+	compile group: "commons-collections", name: "commons-collections", version: "3.2.1"
+	compile group: "javassist", name: "javassist", version: "3.12.0.GA"
+	compile group: "dom4j", name: "dom4j", version: "1.6.1"
+	compile group: "javax.resource", name: "connector", version: "1.0"
+	compile group: "javax.inject", name: "javax.inject", version: "1"
+	compile group: "javax.transaction", name: "jta", version: "1.1"
+
+	testCompile group: "org.mockito", name: "mockito-all", version: "1.9.0"
+	testCompile group: "org.testng", name: "testng", version: "6.8"
+}
+
+//< dependency org = "com.beust" name = "jcommander" rev = "1.12" transitive = "false" / >
+//< dependency org = "org.beanshell" name = "bsh" rev = "2.0b4" transitive = "false" / >

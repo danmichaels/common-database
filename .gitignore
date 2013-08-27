@@ -1,8 +1,11 @@
 .idea/workspace.xml
 .idea/tasks.xml
 
+.gradle/
+
 src/test/resources/testdatabasesql/test.database.properties
 
 dist/
 lib/
 output/
+build/
